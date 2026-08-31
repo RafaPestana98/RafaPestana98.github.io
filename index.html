@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rafaela Pestana — Dados & Análise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2340;
+    --navy-deep:#12172C;
+    --gold:#C9A227;
+    --gold-soft:#E4C767;
+    --teal:#1D6E64;
+    --teal-soft:#2E9284;
+    --paper:#FBFAF6;
+    --paper-card:#FFFFFF;
+    --ink:#20241F;
+    --ink-soft:#5B5F58;
+    --line:#E7E3D6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;}
+  a{color:inherit;}
+
+  .layout{
+    display:flex;
+    min-height:100vh;
+  }
+
+  .sidebar{
+    width:280px;
+    flex-shrink:0;
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#EDE9DA;
+    padding:44px 30px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  .avatar{
+    width:88px;height:88px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--gold-soft), var(--gold) 70%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-size:2rem;font-weight:600;
+    color:var(--navy-deep);
+    margin-bottom:18px;
+  }
+  .sidebar h1{
+    font-size:1.4rem;
+    color:#F6F3E7;
+    margin-bottom:4px;
+  }
+  .sidebar .role{
+    font-size:0.85rem;
+    color:var(--gold-soft);
+    font-family:'IBM Plex Mono',monospace;
+    margin-bottom:32px;
+  }
+  nav.sidenav{display:flex;flex-direction:column;gap:4px;margin-bottom:auto;}
+  nav.sidenav a{
+    text-decoration:none;
+    font-size:0.94rem;
+    padding:9px 12px;
+    border-radius:6px;
+    color:#D9D5C6;
+    transition:background .15s ease, color .15s ease;
+  }
+  nav.sidenav a:hover{background:rgba(228,199,103,0.12); color:#F6F3E7;}
+  .social{display:flex;gap:14px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(237,233,218,0.15);}
+  .social a{
+    width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(237,233,218,0.3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.85rem;text-decoration:none;color:#D9D5C6;
+  }
+
+  main{flex:1; padding:56px 60px 90px; display:flex; justify-content:center;}
+  main > .content{width:100%; max-width:820px;}
+  .intro p{font-size:1.05rem; color:var(--ink-soft); max-width:60ch; margin-bottom:8px;}
+  .intro h2.headline{
+    font-size:clamp(1.7rem,4vw,2.3rem);
+    margin-bottom:18px;
+  }
+  .intro .tags{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-top:20px;
+  }
+  .intro .tags span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    padding:5px 12px;
+    border-radius:20px;
+    border:1px solid var(--teal-soft);
+    color:var(--teal);
+  }
+
+  .section-heading{
+    display:flex;align-items:baseline;gap:10px;
+    margin:68px 0 24px;
+  }
+  .section-heading .icon{font-size:1.4rem;}
+  .section-heading h2{font-size:1.5rem; color:var(--navy);}
+
+  .project{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--gold);
+    border-radius:8px;
+    padding:28px 30px;
+    margin-bottom:26px;
+  }
+  .project h3{font-size:1.25rem; color:var(--navy); margin-bottom:6px;}
+  .project .subtitle{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--teal);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:16px;
+  }
+  .shot{
+    width:100%;
+    aspect-ratio:16/9;
+    background:repeating-linear-gradient(135deg, rgba(201,162,39,0.07) 0 10px, transparent 10px 20px), #F2EFE4;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;color:#9A9689;
+    margin-bottom:18px;
+    text-align:center;padding:10px;
+  }
+  .shot img{width:100%;height:100%;object-fit:cover;border-radius:5px;}
+  .shot.has-img{padding:0;border-style:solid;}
+
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-bottom:18px;
+  }
+  @media(max-width:560px){ .gallery{grid-template-columns:repeat(3,1fr);} }
+  .gallery a{
+    display:block;
+    aspect-ratio:16/10;
+    border-radius:5px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .gallery img{width:100%;height:100%;object-fit:cover; display:block; transition:transform .15s ease;}
+  .gallery a:hover img{transform:scale(1.04);}
+  .gallery .cap{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9.5px;
+    text-align:center;
+    color:var(--ink-soft);
+    margin-top:3px;
+  }
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  @media(max-width:720px){ .cols{grid-template-columns:1fr;} main{padding:40px 22px 70px;} }
+  .cols h4{
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+    font-family:'Work Sans',sans-serif;
+    font-weight:600;
+  }
+  .cols ul{padding-left:18px; margin-bottom:16px;}
+  .cols li{font-size:0.93rem; margin-bottom:5px; color:var(--ink);}
+  .toolrow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;}
+  .toolrow span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    background:#F2EFE4;
+    padding:4px 10px;
+    border-radius:20px;
+    color:var(--ink-soft);
+  }
+  .project-links{display:flex;gap:18px;margin-top:6px;}
+  .project-links a{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px solid var(--teal-soft);
+    padding-bottom:1px;
+  }
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:720px){ .grid2{grid-template-columns:1fr;} }
+  .cert{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:20px 22px;
+  }
+  .cert .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;display:block;}
+  .cert h3{font-size:1.05rem;color:var(--navy);margin-bottom:6px;}
+  .cert p{font-size:0.88rem;color:var(--ink-soft);margin-bottom:10px;}
+  .cert a{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-soft);}
+
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;}
+  .skill-card{background:var(--paper-card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;}
+  .skill-card .k-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;}
+  .skill-card .k-val{font-size:0.92rem;color:var(--navy);}
+
+  footer.contact{
+    margin-top:70px;
+    padding:26px 0;
+    border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  @media(max-width:820px){
+    .layout{flex-direction:column;}
+    .sidebar{width:100%; height:auto; position:relative; padding:30px 24px;}
+    nav.sidenav{flex-direction:row; flex-wrap:wrap; margin-bottom:0;}
+    .social{margin-top:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="avatar">RP</div>
+    <h1>Rafaela Pestana</h1>
+    <div class="role">Dados · Power BI · Python</div>
+
+    <nav class="sidenav">
+      <a href="#sobre">Sobre mim</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#formacao">Formação</a>
+      <a href="#competencias">Competências</a>
+    </nav>
+
+    <div class="social">
+      <a href="#" title="LinkedIn">in</a>
+      <a href="#" title="GitHub">gh</a>
+      <a href="#" title="Email">@</a>
+    </div>
+  </aside>
+
+  <main>
+  <div class="content">
+
+    <section id="sobre" class="intro">
+      <h2 class="headline">Encontro histórias dentro dos números — e gosto especialmente de as contar em Power BI.</h2>
+      <p>Sou técnica em Gestão de Informação e Ciência dos Dados (nível 5), e já construí desde sistemas de gestão em produção real até dashboards analíticos e modelos de Machine Learning. Sinto-me em casa no Power BI, mas ando confortável em qualquer ponto do processo — desde tratar dados sujos em Python até apresentar um resultado que faça sentido para quem nunca viu uma linha de código. Estou a começar a minha carreira e disposta a mergulhar em qualquer desafio na área de dados.</p>
+      <div class="tags">
+        <span>Power BI</span><span>Python</span><span>SQL</span><span>Machine Learning</span><span>Flask</span>
+      </div>
+    </section>
+
+    <div class="section-heading" id="projetos">
+      <span class="icon">📊</span>
+      <h2>Projetos</h2>
+    </div>
+
+    <div class="project">
+      <h3>Game On: A Data Story</h3>
+      <div class="subtitle">Análise de dados · Machine Learning · Power BI · Aplicação Web</div>
+
+      <h4 style="margin-bottom:8px;">Aplicação Web</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/boardgamegeek/pagina_geral.png" target="_blank"><img src="assets/screenshots/boardgamegeek/pagina_geral.png" alt="Página inicial"></a>
+          <div class="cap">Página inicial</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/catalogo_de_jogos.png" target="_blank"><img src="assets/screenshots/boardgamegeek/catalogo_de_jogos.png" alt="Catálogo de jogos"></a>
+          <div class="cap">Catálogo</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/rankings.png" target="_blank"><img src="assets/screenshots/boardgamegeek/rankings.png" alt="Rankings"></a>
+          <div class="cap">Rankings</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/recomendador_de_jogos.png" target="_blank"><img src="assets/screenshots/boardgamegeek/recomendador_de_jogos.png" alt="Recomendador de jogos"></a>
+          <div class="cap">Recomendador</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/quiz.png" target="_blank"><img src="assets/screenshots/boardgamegeek/quiz.png" alt="Quiz de cultura geral"></a>
+          <div class="cap">Quiz</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/chatbot.png" target="_blank"><img src="assets/screenshots/boardgamegeek/chatbot.png" alt="Chatbot assistente"></a>
+          <div class="cap">Chatbot</div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom:8px;">Dashboard Power BI</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/boardgamegeek/dash_vista_geral.png" target="_blank"><img src="assets/screenshots/boardgamegeek/dash_vista_geral.png" alt="Dashboard — Vista Geral"></a>
+          <div class="cap">Vista Geral</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/dash_categorias.png" target="_blank"><img src="assets/screenshots/boardgamegeek/dash_categorias.png" alt="Dashboard — Categorias e Mecânicas"></a>
+          <div class="cap">Categorias & Mecânicas</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/dash_impacto.png" target="_blank"><img src="assets/screenshots/boardgamegeek/dash_impacto.png" alt="Dashboard — Impacto do COVID"></a>
+          <div class="cap">Impacto do COVID</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/dash_machine.png" target="_blank"><img src="assets/screenshots/boardgamegeek/dash_machine.png" alt="Dashboard — Machine Learning"></a>
+          <div class="cap">Machine Learning</div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom:8px;">Apresentação</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/boardgamegeek/capa.png" target="_blank"><img src="assets/screenshots/boardgamegeek/capa.png" alt="Capa do projeto"></a>
+          <div class="cap">Capa</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/boardgamegeek/jogo_pygame.png" target="_blank"><img src="assets/screenshots/boardgamegeek/jogo_pygame.png" alt="Apresentação em Pygame"></a>
+          <div class="cap">Jogo Pygame</div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h4>Objetivo</h4>
+          <ul>
+            <li>Explorar 21.925 jogos do BoardGameGeek para perceber o que torna um jogo bem avaliado</li>
+            <li>Construir uma aplicação onde qualquer pessoa encontra o jogo certo para si (por filtros, recomendação personalizada ou chatbot)</li>
+            <li>Segmentar jogos por perfil usando Machine Learning e identificar os fatores que mais pesam na avaliação</li>
+          </ul>
+          <h4>Resultados</h4>
+          <ul>
+            <li>Aplicação Flask com catálogo pesquisável, rankings, recomendador por preferências, quiz de cultura geral com o tema do jogo, e chatbot que responde sobre qualquer jogo da base de dados</li>
+            <li>Dashboard Power BI com 4 páginas: visão geral do mercado, categorias e mecânicas, impacto da pandemia nos lançamentos, e análise de Machine Learning</li>
+            <li>Modelo Random Forest (R²=0,34) e matriz de correlação identificam a complexidade como o fator com mais peso na avaliação de um jogo</li>
+            <li>Clustering com K-Means separa os jogos em 4 perfis (Jogos Populares, Estratégia Pesada, Jogos de Nicho, Jogos Casuais)</li>
+            <li>Apresentação final interativa em Pygame, em formato de tabuleiro, a percorrer as principais descobertas</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ferramentas utilizadas</h4>
+          <div class="toolrow">
+            <span>Python</span><span>SQLite</span><span>scikit-learn</span><span>Power BI</span><span>DAX</span><span>Flask</span><span>Pygame</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#">Ver no GitHub →</a>
+        <a href="#">Ver dashboard →</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <h3>CHEF.OS — Gestão de Pastelaria</h3>
+      <div class="subtitle">Sistema em produção · Flask · MySQL</div>
+      <h4 style="margin-bottom:8px;">Sistema</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/pastelarias/vista_geral.png" target="_blank"><img src="assets/screenshots/pastelarias/vista_geral.png" alt="Vista Geral"></a>
+          <div class="cap">Vista Geral</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/vendas.png" target="_blank"><img src="assets/screenshots/pastelarias/vendas.png" alt="Vendas"></a>
+          <div class="cap">Vendas</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/rh_colaboradores.png" target="_blank"><img src="assets/screenshots/pastelarias/rh_colaboradores.png" alt="RH — Colaboradores"></a>
+          <div class="cap">RH · Equipa</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/rh_ferias.png" target="_blank"><img src="assets/screenshots/pastelarias/rh_ferias.png" alt="RH — Férias"></a>
+          <div class="cap">RH · Férias</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/compras.png" target="_blank"><img src="assets/screenshots/pastelarias/compras.png" alt="Compras"></a>
+          <div class="cap">Compras</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/fornecedores.png" target="_blank"><img src="assets/screenshots/pastelarias/fornecedores.png" alt="Fornecedores"></a>
+          <div class="cap">Fornecedores</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/pagamentos.png" target="_blank"><img src="assets/screenshots/pastelarias/pagamentos.png" alt="Pagamentos"></a>
+          <div class="cap">Pagamentos</div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom:8px;">Metabase</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/pastelarias/metabase_vistageral.png" target="_blank"><img src="assets/screenshots/pastelarias/metabase_vistageral.png" alt="Metabase — Vista Geral"></a>
+          <div class="cap">Vista Geral</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/metabase_rh.png" target="_blank"><img src="assets/screenshots/pastelarias/metabase_rh.png" alt="Metabase — RH"></a>
+          <div class="cap">RH</div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom:8px;">Power BI</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/pastelarias/dash_vista_geral.png" target="_blank"><img src="assets/screenshots/pastelarias/dash_vista_geral.png" alt="Power BI — Vista Geral"></a>
+          <div class="cap">Vista Geral</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/dash_operacional.png" target="_blank"><img src="assets/screenshots/pastelarias/dash_operacional.png" alt="Power BI — Operacional"></a>
+          <div class="cap">Operacional</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/dash_rh.png" target="_blank"><img src="assets/screenshots/pastelarias/dash_rh.png" alt="Power BI — RH"></a>
+          <div class="cap">RH</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/pastelarias/dah_pagamentos.png" target="_blank"><img src="assets/screenshots/pastelarias/dah_pagamentos.png" alt="Power BI — Pagamentos"></a>
+          <div class="cap">Pagamentos</div>
+        </div>
+      </div>
+      <div class="cols">
+        <div>
+          <h4>Objetivo</h4>
+          <ul>
+            <li>Substituir processos manuais e folhas soltas na gestão diária de uma rede de 3 lojas + fábrica</li>
+            <li>Centralizar operação, RH, cadeia de fornecimento e financeiro numa única plataforma</li>
+            <li>Dar visibilidade imediata do que precisa de atenção — stocks críticos, pagamentos a vencer, férias pendentes</li>
+          </ul>
+          <h4>Resultados</h4>
+          <ul>
+            <li>Vista geral com alertas em tempo real: stock crítico, pagamentos urgentes, colaboradores ativos e transferências pendentes</li>
+            <li>Módulos completos de RH (equipa, horários, férias, formações, questionários) e de cadeia de fornecimento (fornecedores, compras, encomendas de fábrica, transferências entre lojas)</li>
+            <li>Gestão financeira integrada: vendas, resumo diário, pagamentos e relatórios</li>
+            <li>Sistema de permissões por utilizador (diretor, encarregada, colaborador)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ferramentas utilizadas</h4>
+          <div class="toolrow">
+            <span>Flask</span><span>MySQL</span><span>Docker</span><span>Metabase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <h3>Dashboards Power BI</h3>
+      <div class="subtitle">Business Intelligence · DAX · Power Query</div>
+
+      <h4 style="margin-bottom:8px;">RH</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/powerbi/ex_contratocoes.png" target="_blank"><img src="assets/screenshots/powerbi/ex_contratocoes.png" alt="Dashboard RH — Contratações"></a>
+          <div class="cap">Contratações</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/powerbi/ex_salario.png" target="_blank"><img src="assets/screenshots/powerbi/ex_salario.png" alt="Dashboard RH — Salário"></a>
+          <div class="cap">Salário</div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom:8px;">Vendas</h4>
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/powerbi/exerci_vista_geral.png" target="_blank"><img src="assets/screenshots/powerbi/exerci_vista_geral.png" alt="Dashboard Vendas — Vista Geral"></a>
+          <div class="cap">Vista Geral</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/powerbi/exerci_produtos.png" target="_blank"><img src="assets/screenshots/powerbi/exerci_produtos.png" alt="Dashboard Vendas — Produtos"></a>
+          <div class="cap">Produtos</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/powerbi/exerci_clientes.png" target="_blank"><img src="assets/screenshots/powerbi/exerci_clientes.png" alt="Dashboard Vendas — Clientes"></a>
+          <div class="cap">Clientes</div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h4>Objetivo</h4>
+          <ul>
+            <li>Construir dashboards de KPI para RH (contratações e salários) e Vendas (vista geral, produtos e clientes)</li>
+          </ul>
+          <h4>Resultados</h4>
+          <ul>
+            <li>Dashboard de RH com turnover, absentismo, custo por cargo e mapa de custos salariais por cidade</li>
+            <li>Dashboard de Vendas com faturação, margem, vendas por continente/marca, ranking de produtos e clientes, e evolução mensal com metas vs. realizado</li>
+            <li>Medidas DAX avançadas (variáveis, percentagens de turnover/absentismo, tabelas de ranking)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ferramentas utilizadas</h4>
+          <div class="toolrow">
+            <span>Power BI</span><span>DAX</span><span>Power Query</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#">Ver dashboards →</a>
+      </div>
+    </div>
+
+    <div class="section-heading" id="formacao">
+      <span class="icon">🎓</span>
+      <h2>Formação</h2>
+    </div>
+
+    <h4 style="margin-bottom:8px;">Cisco Networking Academy</h4>
+    <div class="grid2">
+      <div class="cert">
+        <span class="tag">Certificado</span>
+        <h3>Introduction to Data Science</h3>
+        <p>Fundamentos de ciência de dados: recolha, análise e comunicação de dados.</p>
+        <a href="certificados/cisco/cisco-intro-data-science.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+      <div class="cert">
+        <span class="tag">Certificado</span>
+        <h3>Data Analytics Essentials</h3>
+        <p>Fundamentos de análise de dados aplicados a problemas reais.</p>
+        <a href="certificados/cisco/cisco-data-analytics-essentials.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+      <div class="cert">
+        <span class="tag">Certificado</span>
+        <h3>Data Science Essentials with Python</h3>
+        <p>Ciência de dados aplicada com Python: tratamento e análise de dados.</p>
+        <a href="certificados/cisco/cisco-data-science-python.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+      <div class="cert">
+        <span class="tag">Certificado</span>
+        <h3>Python Essentials 1</h3>
+        <p>Fundamentos de programação em Python: variáveis, estruturas de controlo e funções.</p>
+        <a href="certificados/cisco/cisco-python-essentials-1.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+      <div class="cert">
+        <span class="tag">Certificado</span>
+        <h3>Python Essentials 2</h3>
+        <p>Programação Python orientada a objetos e desenvolvimento de programas multi-módulo.</p>
+        <a href="certificados/cisco/cisco-python-essentials-2.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+      <div class="cert">
+        <span class="tag">Certificado · 6 módulos</span>
+        <h3>English for IT</h3>
+        <p>Inglês técnico para IT (nível B2): descrição de processos, comunicação profissional e vocabulário de segurança e cloud.</p>
+        <a href="certificados/cisco/cisco-english-for-it.pdf" target="_blank">Ver certificados (PDF) →</a>
+      </div>
+    </div>
+
+    <h4 style="margin:28px 0 8px;">Google · Coursera</h4>
+    <div class="grid2">
+      <div class="cert">
+        <span class="tag">Certificado Profissional · 8 cursos</span>
+        <h3>Google Data Analytics</h3>
+        <p>Programa completo de análise de dados: fundamentos, questões de negócio, limpeza e preparação de dados, análise, visualização, R e um projeto final (capstone).</p>
+        <a href="certificados/google/google-data-analytics.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+      <div class="cert">
+        <span class="tag">Certificado Profissional · 7 cursos</span>
+        <h3>Google Advanced Data Analytics</h3>
+        <p>Nível avançado: estatística, regressão, machine learning, preparação para candidaturas com IA e um projeto final (capstone).</p>
+        <a href="certificados/google/google-advanced-data-analytics.pdf" target="_blank">Ver certificado (PDF) →</a>
+      </div>
+    </div>
+
+    <div class="section-heading" id="competencias">
+      <span class="icon">🛠️</span>
+      <h2>Competências</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card"><div class="k-label">Linguagens</div><div class="k-val">Python, SQL, VBA</div></div>
+      <div class="skill-card"><div class="k-label">Dados & BI</div><div class="k-val">Power BI, DAX, Metabase</div></div>
+      <div class="skill-card"><div class="k-label">Machine Learning</div><div class="k-val">scikit-learn, pandas, numpy</div></div>
+      <div class="skill-card"><div class="k-label">Desenvolvimento</div><div class="k-val">Flask, MySQL, Docker</div></div>
+    </div>
+
+    <footer class="contact">
+      Rafaela Pestana · Lisboa, Portugal · <a href="#">LinkedIn</a> · <a href="#">GitHub</a> · <a href="#">Email</a>
+    </footer>
+
+  </div>
+  </main>
+</div>
+</body>
+</html>
