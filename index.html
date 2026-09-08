@@ -8,17 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#1B2340;
-    --navy-deep:#12172C;
-    --gold:#C9A227;
-    --gold-soft:#E4C767;
-    --teal:#1D6E64;
-    --teal-soft:#2E9284;
-    --paper:#FBFAF6;
+    --navy:#0E2A3D;
+    --navy-deep:#081B29;
+    --gold:#2FBFB0;
+    --gold-soft:#6EE0D3;
+    --teal:#2C5570;
+    --teal-soft:#4C7A95;
+    --paper:#F6FAFB;
     --paper-card:#FFFFFF;
-    --ink:#20241F;
-    --ink-soft:#5B5F58;
-    --line:#E7E3D6;
+    --ink:#152229;
+    --ink-soft:#54707A;
+    --line:#DCE7EB;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -40,7 +40,7 @@
     width:280px;
     flex-shrink:0;
     background:linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
-    color:#EDE9DA;
+    color:#E4F1F4;
     padding:44px 30px;
     position:sticky;
     top:0;
@@ -58,7 +58,7 @@
   }
   .sidebar h1{
     font-size:1.4rem;
-    color:#F6F3E7;
+    color:#EFFAFB;
     margin-bottom:4px;
   }
   .sidebar .role{
@@ -73,21 +73,21 @@
     font-size:0.94rem;
     padding:9px 12px;
     border-radius:6px;
-    color:#D9D5C6;
+    color:#B9D2DA;
     transition:background .15s ease, color .15s ease;
   }
-  nav.sidenav a:hover{background:rgba(228,199,103,0.12); color:#F6F3E7;}
-  .social{display:flex;gap:14px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(237,233,218,0.15);}
+  nav.sidenav a:hover{background:rgba(47,191,176,0.15); color:#EFFAFB;}
+  .social{display:flex;gap:14px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(228,241,244,0.15);}
   .social a{
     width:34px;height:34px;border-radius:50%;
-    border:1px solid rgba(237,233,218,0.3);
+    border:1px solid rgba(228,241,244,0.3);
     display:flex;align-items:center;justify-content:center;
-    font-size:0.85rem;text-decoration:none;color:#D9D5C6;
+    font-size:0.85rem;text-decoration:none;color:#B9D2DA;
   }
 
   main{flex:1; padding:56px 60px 90px; display:flex; justify-content:center;}
-  main > .content{width:100%; max-width:820px;}
-  .intro p{font-size:1.05rem; color:var(--ink-soft); max-width:60ch; margin-bottom:8px;}
+  main > .content{width:100%; max-width:1500px;}
+  .intro p{font-size:1.05rem; color:var(--ink-soft); max-width:none; margin-bottom:8px;}
   .intro h2.headline{
     font-size:clamp(1.7rem,4vw,2.3rem);
     margin-bottom:18px;
@@ -132,12 +132,12 @@
   .shot{
     width:100%;
     aspect-ratio:16/9;
-    background:repeating-linear-gradient(135deg, rgba(201,162,39,0.07) 0 10px, transparent 10px 20px), #F2EFE4;
+    background:repeating-linear-gradient(135deg, rgba(47,191,176,0.10) 0 10px, transparent 10px 20px), #EAF3F5;
     border:1px dashed var(--line);
     border-radius:6px;
     display:flex;align-items:center;justify-content:center;
     font-family:'IBM Plex Mono',monospace;
-    font-size:11px;color:#9A9689;
+    font-size:11px;color:#8CA6AF;
     margin-bottom:18px;
     text-align:center;padding:10px;
   }
@@ -167,24 +167,27 @@
     color:var(--ink-soft);
     margin-top:3px;
   }
-  .cols{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
-  @media(max-width:720px){ .cols{grid-template-columns:1fr;} main{padding:40px 22px 70px;} }
+  .cols{display:block;}
+  .cols > div{margin-bottom:6px;}
+  .cols ul{max-width:none;}
+  @media(max-width:720px){ main{padding:40px 22px 70px;} }
   .cols h4{
     font-size:0.82rem;
     text-transform:uppercase;
     letter-spacing:0.05em;
     color:var(--ink-soft);
-    margin-bottom:8px;
+    margin:18px 0 8px;
     font-family:'Work Sans',sans-serif;
     font-weight:600;
   }
+  .cols > div:first-child h4:first-child{margin-top:0;}
   .cols ul{padding-left:18px; margin-bottom:16px;}
   .cols li{font-size:0.93rem; margin-bottom:5px; color:var(--ink);}
   .toolrow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;}
   .toolrow span{
     font-family:'IBM Plex Mono',monospace;
     font-size:11px;
-    background:#F2EFE4;
+    background:#EAF3F5;
     padding:4px 10px;
     border-radius:20px;
     color:var(--ink-soft);
@@ -250,9 +253,9 @@
     </nav>
 
     <div class="social">
-      <a href="#" title="LinkedIn">in</a>
-      <a href="#" title="GitHub">gh</a>
-      <a href="#" title="Email">@</a>
+      <a href="https://www.linkedin.com/in/rafaela-pestana-290a861b7/" target="_blank" title="LinkedIn">in</a>
+      <a href="https://github.com/RafaPestana98" target="_blank" title="GitHub">gh</a>
+      <a href="mailto:p.rafaelaalexandra@gmail.com" title="Email">@</a>
     </div>
   </aside>
 
@@ -361,8 +364,7 @@
         </div>
       </div>
       <div class="project-links">
-        <a href="#">Ver no GitHub →</a>
-        <a href="#">Ver dashboard →</a>
+        <a href="https://github.com/RafaPestana98/game-on-data-story" target="_blank">Ver no GitHub →</a>
       </div>
     </div>
 
@@ -451,7 +453,62 @@
         <div>
           <h4>Ferramentas utilizadas</h4>
           <div class="toolrow">
-            <span>Flask</span><span>MySQL</span><span>Docker</span><span>Metabase</span>
+            <span>Flask</span><span>MySQL</span><span>Docker</span><span>Metabase</span><span>Power BI</span><span>DAX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <h3>FC Alverca — Análise da Época (Primeira Liga)</h3>
+      <div class="subtitle">Business Intelligence · Power BI · DAX</div>
+
+      <div class="gallery">
+        <div>
+          <a href="assets/screenshots/alverca/1_resumo_da_epoca.png" target="_blank"><img src="assets/screenshots/alverca/1_resumo_da_epoca.png" alt="Resumo da Época"></a>
+          <div class="cap">Resumo da Época</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/alverca/2_jogadores.png" target="_blank"><img src="assets/screenshots/alverca/2_jogadores.png" alt="Jogadores"></a>
+          <div class="cap">Jogadores</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/alverca/3_comparacao_com_a_liga.png" target="_blank"><img src="assets/screenshots/alverca/3_comparacao_com_a_liga.png" alt="Comparação com a Liga"></a>
+          <div class="cap">Comparação com a Liga</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/alverca/4_ficha_de_jogador.png" target="_blank"><img src="assets/screenshots/alverca/4_ficha_de_jogador.png" alt="Ficha de Jogador"></a>
+          <div class="cap">Ficha de Jogador</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/alverca/5_guarda_redes.png" target="_blank"><img src="assets/screenshots/alverca/5_guarda_redes.png" alt="Guarda-Redes"></a>
+          <div class="cap">Guarda-Redes</div>
+        </div>
+        <div>
+          <a href="assets/screenshots/alverca/6_eficiencia_de_finalizacao.png" target="_blank"><img src="assets/screenshots/alverca/6_eficiencia_de_finalizacao.png" alt="Eficiência de Finalização"></a>
+          <div class="cap">Eficiência de Finalização</div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h4>Objetivo</h4>
+          <ul>
+            <li>Resumir a época do FC Alverca na Primeira Liga de forma visual e imediata: resultados, evolução na classificação e desempenho individual do plantel</li>
+            <li>Comparar o Alverca com as restantes equipas da liga em golos marcados, sofridos e diferença de golos</li>
+          </ul>
+          <h4>Resultados</h4>
+          <ul>
+            <li>Dashboard com 6 páginas: resumo da época (pontos, posição, evolução), estatísticas do plantel, comparação com a liga, ficha individual por jogador, guarda-redes e eficiência de finalização</li>
+            <li>Fecho da época em 11º lugar com 39 pontos, 35 golos marcados e 52 sofridos, com evolução de pontos e resultados por jornada visíveis num relance</li>
+            <li>Análise de finalização (remates vs. golos) e impacto individual no resultado por jogador</li>
+            <li>Fichas interativas por jogador com estatísticas ofensivas e defensivas individuais</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ferramentas utilizadas</h4>
+          <div class="toolrow">
+            <span>Power BI</span><span>DAX</span><span>Power Query</span>
           </div>
         </div>
       </div>
@@ -459,7 +516,7 @@
 
     <div class="project">
       <h3>Dashboards Power BI</h3>
-      <div class="subtitle">Business Intelligence · DAX · Power Query</div>
+      <div class="subtitle">Business Intelligence · DAX</div>
 
       <h4 style="margin-bottom:8px;">RH</h4>
       <div class="gallery">
@@ -505,12 +562,9 @@
         <div>
           <h4>Ferramentas utilizadas</h4>
           <div class="toolrow">
-            <span>Power BI</span><span>DAX</span><span>Power Query</span>
+            <span>Power BI</span><span>DAX</span>
           </div>
         </div>
-      </div>
-      <div class="project-links">
-        <a href="#">Ver dashboards →</a>
       </div>
     </div>
 
@@ -580,14 +634,14 @@
       <h2>Competências</h2>
     </div>
     <div class="skill-grid">
-      <div class="skill-card"><div class="k-label">Linguagens</div><div class="k-val">Python, SQL, VBA</div></div>
+      <div class="skill-card"><div class="k-label">Linguagens</div><div class="k-val">Python, SQL</div></div>
       <div class="skill-card"><div class="k-label">Dados & BI</div><div class="k-val">Power BI, DAX, Metabase</div></div>
       <div class="skill-card"><div class="k-label">Machine Learning</div><div class="k-val">scikit-learn, pandas, numpy</div></div>
-      <div class="skill-card"><div class="k-label">Desenvolvimento</div><div class="k-val">Flask, MySQL, Docker</div></div>
+      <div class="skill-card"><div class="k-label">Desenvolvimento</div><div class="k-val">Flask, MySQL, Docker, Jupyter</div></div>
     </div>
 
     <footer class="contact">
-      Rafaela Pestana · Lisboa, Portugal · <a href="#">LinkedIn</a> · <a href="#">GitHub</a> · <a href="#">Email</a>
+      Rafaela Pestana · Lisboa, Portugal · <a href="https://www.linkedin.com/in/rafaela-pestana-290a861b7/" target="_blank">LinkedIn</a> · <a href="https://github.com/RafaPestana98" target="_blank">GitHub</a> · <a href="mailto:p.rafaelaalexandra@gmail.com">Email</a>
     </footer>
 
   </div>
